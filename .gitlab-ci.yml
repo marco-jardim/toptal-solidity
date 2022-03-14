@@ -1,0 +1,28 @@
+stages:         
+  - build
+  - test
+  - deploy
+
+build-job:     
+  stage: build
+  script:
+    - echo "Compiling the code..."
+    - npm i
+    - npx hardhat compile
+    - echo "Compile complete."
+
+unit-test-job:  
+  stage: test  
+  script:
+    - echo "Running unit tests..."
+    - npm i
+    - npx hardhat test
+    - echo "Unit tests complete."
+
+deploy-job:
+  stage: deploy
+  script:
+    - echo "Deploying..."
+    - npm i
+    - npx hardhat run scripts/deploy.js --network rinkeby
+    - echo "Deploy complete."
